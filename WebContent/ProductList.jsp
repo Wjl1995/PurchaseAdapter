@@ -120,7 +120,17 @@ $(function(){
 	</div>
 	
 	<div id="shopCart" class="section" style="display:none">
-		<p>欢迎来到购物车</p> 
+		<p>欢迎来到购物车</p>
+		<table border="1">
+		<tr>
+		<th>选中的商品</th>
+		</tr> 
+		<tr>
+		<th scope="col">商品</th>
+		<th scope="col">商品名称</th>
+		<th scope="col">商品单价</th>
+		<th scope="col">商品数量</th>
+		</tr>
 		<%  
 			ArrayList<ProductInfo> productList = null;
 			ArrayList<ProductInfo> proLinkList = null;
@@ -138,26 +148,47 @@ $(function(){
 						String proName = "";
 						if (product.getPName()!=null)
 							 proName = new String(product.getPName().getBytes("ISO-8859-1"), "utf-8");
-						out.println(proName+";"+
-								product.getPic_Path()+";"+
-								product.getP_Price()+";"+
-								product.getPMount()+"<br>");
-					}
-					for (ProductInfo product:proLinkList)
+			%>
+					<tr>
+					<td width="196" rowspan="4">
+    					<div title="单击进入商品" align="center">
+    						<img id = "faceImg" src=<%= product.getPic_Path()%> width="140" height="140" />
+    					</div>
+    				</td>
+						<td> <%= proName%> </td>
+						<td> <%= product.getP_Price()%> </td>
+						<td> <%= product.getPMount()%> </td>
+					</tr>
+			<% 		}%>
+		</table>
+		
+		<input type="button" name="checkOut" value="结算" id="CheckOutBtn">
+		
+		<table border="2">
+		<tr>
+		<th>推荐商品</th>
+		</tr>
+		<tr>
+		<th scope="col">商品</th>
+		</tr>
+		
+			<%		for (ProductInfo product:proLinkList)
 					{
-						String proName = "";
-						if (product.getPName()!=null)
-							 proName = new String(product.getPName().getBytes("ISO-8859-1"), "utf-8");
-						out.println(proName+";"+
-								product.getPic_Path()+";"+
-								product.getP_Price()+";"+
-								product.getPMount()+"<br>");
-					}
+			%>			
+					<tr>
+						<td width="196" rowspan="4">
+    						<div title="单击进入商品" align="center">
+    							<img id = "faceImg" src=<%= product.getPic_Path()%> width="140" height="140" />
+    						</div>
+    					</td>
+					</tr>
+			<% 		}%>
+		<% 
 				}
 			}
 		%>
+		</table>
 		
-		<input type="button" name="checkOut" value="结算" id="CheckOutBtn">
 	</div>
 
 	<div id="footer">
